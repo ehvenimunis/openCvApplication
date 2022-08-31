@@ -7,15 +7,31 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
-
+using namespace std;
 #define w 400
 using namespace cv;
+/*
 void MyEllipse(Mat img, double angle);
 void MyFilledCircle(Mat img, Point center);
 void MyPolygon(Mat img);
 void MyLine(Mat img, Point start, Point end);
+*/
+void locator(int event, int x, int y, int flags, void* userdata) { //function to track mouse movement and click//
+    if (event == EVENT_LBUTTONDOWN) { //when left button clicked//
+        cout << "Left click has been made, Position:(" << x << "," << y << ")" << endl;
+    }
+    else if (event == EVENT_RBUTTONDOWN) { //when right button clicked//
+        cout << "Rightclick has been made, Position:(" << x << "," << y << ")" << endl;
+    }
+    else if (event == EVENT_MBUTTONDOWN) { //when middle button clicked//
+        cout << "Middleclick has been made, Position:(" << x << "," << y << ")" << endl;
+    }
+    else if (event == EVENT_MOUSEMOVE) { //when mouse pointer moves//
+        cout << "Current mouse position:(" << x << "," << y << ")" << endl;
+    }
+}
 int main(void) {
-    char window[] = "Drawing 2: Rook";
+    char window[] = "Drawing 1";
     Mat image = Mat::zeros(w, w, CV_8UC3);
 
     Mat img(w, w, CV_8UC3);
@@ -46,6 +62,8 @@ int main(void) {
         std::cout << "Could not read the image: " << std::endl;
         return 1;
     }
+    namedWindow("Drawing 1");//declaring window to show image//
+    setMouseCallback("Drawing 1", locator, NULL);//Mouse callback function on define window//
     imshow(window, image);
     moveWindow(window, w, 200);
     waitKey(0);
