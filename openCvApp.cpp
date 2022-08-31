@@ -7,6 +7,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
+
 #define w 400
 using namespace cv;
 void MyEllipse(Mat img, double angle);
@@ -16,6 +17,10 @@ void MyLine(Mat img, Point start, Point end);
 int main(void) {
     char window[] = "Drawing 2: Rook";
     Mat image = Mat::zeros(w, w, CV_8UC3);
+
+    Mat img(w, w, CV_8UC3);
+    randu(img, Scalar(0, 0, 0), Scalar(255, 255, 255));
+    imshow("random colors image", img);
 
     /*
     MyEllipse(atom_image, 90);
@@ -36,7 +41,11 @@ int main(void) {
     MyLine(rook_image, Point(3 * w / 4, 7 * w / 8), Point(3 * w / 4, w));
     */
 
-
+    if (image.empty())
+    {
+        std::cout << "Could not read the image: " << std::endl;
+        return 1;
+    }
     imshow(window, image);
     moveWindow(window, w, 200);
     waitKey(0);
