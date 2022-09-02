@@ -2,7 +2,8 @@
     Author: Muhammed Salih Aydoğan
     Date:  02/08/2022
 */
-#include <iostream>                        
+#include <ctime>
+#include <iostream>     
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
@@ -15,7 +16,7 @@ class App
 {
 public:
     App();
-    ~App();
+    int max = 255, min = 0;
     void setWin(const std::string& _winname);
 private:
     Mat image;
@@ -33,12 +34,8 @@ void on_mouse(int ev, int x, int y, int, void* obj)
 
 App::App()
 {
-    
-}
-
-App::~App()
-{
-    
+    srand(time(0));
+    setWin("Screen For Mouse Handle");
 }
 
 void App::setWin(const std::string& _winname)
@@ -55,7 +52,7 @@ void App::MyFilledCircle(int x, int y)
     circle(image,
         Point(x, y),
         size,
-        Scalar(x, y, x+y),
+        Scalar(rand() % (max - min + 1) + min, rand() % (max - min + 1) + min, rand() % (max - min + 1) + min),
         FILLED,
         LINE_8);
     imshow(winname, image);
@@ -83,6 +80,5 @@ void App::on_mouse_internal(int ev, int x, int y)
 
 int main(void) {
     App mt;
-    mt.setWin("Screen For Mouse Handle");
     return(0);
 }
