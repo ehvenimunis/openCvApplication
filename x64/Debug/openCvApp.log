@@ -1,2 +1,4 @@
 ﻿  openCvApp.cpp
-  openCvApp.vcxproj -> C:\Users\90507\Documents\OpenCVExamle\openCvApp\x64\Debug\openCvApp.exe
+C:\Users\90507\Documents\OpenCVExamle\openCvApp\openCvApp.cpp(17,10): warning C4200: standart olmayan uzantı kullanıldı: yapıda/birleşimde sıfır boyutlu dizi
+C:\Users\90507\Documents\OpenCVExamle\openCvApp\openCvApp.cpp(17,10): message : Bu üye, varsayılan olarak ayarlanan bir oluşturucu veya kopyalama/taşıma atama işleci tarafından yoksayılacak
+C:\Users\90507\Documents\OpenCVExamle\openCvApp\openCvApp.cpp(54,43): error C3867: 'Mouse::locator': standart olmayan söz dizimi; bir üyeye işaretçi oluşturmak için '&' kullanın
