@@ -20,11 +20,18 @@ public:
     void setWin(const std::string& _winname);
 private:
     Mat image;
-    std::string winname;
+    std::string winname;  /* winname Name of the window */
     void on_mouse_internal(int ev, int x, int y);
-    void MyFilledCircle(int x, int y);
+    void filled_circle(int x, int y);
     friend void on_mouse(int ev, int x, int y, int, void* obj);
 };
+
+/* Constructor */
+App::App()
+{
+    srand(time(0));
+    setWin("Screen For Mouse Handle");
+}
 void on_mouse(int ev, int x, int y, int, void* obj)
 {
     App* app = static_cast<App*>(obj);
@@ -32,12 +39,7 @@ void on_mouse(int ev, int x, int y, int, void* obj)
         app->on_mouse_internal(ev, x, y);
 }
 
-App::App()
-{
-    srand(time(0));
-    setWin("Screen For Mouse Handle");
-}
-
+/* Sets the window name */
 void App::setWin(const std::string& _winname)
 {
     cv::namedWindow(_winname);
@@ -47,7 +49,9 @@ void App::setWin(const std::string& _winname)
     imshow(winname, image);
     waitKey(0);
 }
-void App::MyFilledCircle(int x, int y)
+
+/* Draws to the coordinates it receives */
+void App::filled_circle(int x, int y)
 {
     circle(image,
         Point(x, y),
@@ -58,22 +62,23 @@ void App::MyFilledCircle(int x, int y)
     imshow(winname, image);
 }
 
+/* Callback function for mouse events. */
 void App::on_mouse_internal(int ev, int x, int y)
 {
     if (ev == EVENT_LBUTTONDOWN) { //when left button clicked//
-        MyFilledCircle(x,y);
+        filled_circle(x,y);
         cout << "Left click has been made, Position:(" << x << "," << y << ")" << endl;
     }
     else if (ev == EVENT_RBUTTONDOWN) { //when right button clicked//
-        MyFilledCircle(x, y);
+        filled_circle(x, y);
         cout << "Rightclick has been made, Position:(" << x << "," << y << ")" << endl;
     }
     else if (ev == EVENT_MBUTTONDOWN) { //when middle button clicked//
-        MyFilledCircle(x, y);
+        filled_circle(x, y);
         cout << "Middleclick has been made, Position:(" << x << "," << y << ")" << endl;
     }
     else if (ev == EVENT_MOUSEMOVE) { //when mouse pointer moves//
-        MyFilledCircle(x, y);
+        filled_circle(x, y);
         cout << "Current mouse position:(" << x << "," << y << ")" << endl;
     }
 }
